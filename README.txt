@@ -5,6 +5,9 @@ Here they are able to find people who are under the same major as them
 and bloom a new possible friendship or simply find people to study with using
 our messaging system and our unique profile customizability.
 
+Please view the SDLC to see an indepth look about this code and what
+it pertains.
+
 
 
 
