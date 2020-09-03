@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<html>
+<body style="background-color:#476b83">
+  <br><br><br><br>
+<center style = "position: relative;"><font color="#FFFFFF"><div>It has come to our attention that there has been several
+                              reports against your account for the various reasons.</div>
+                              {% for reports in getReasons %}
+                              <li><font color="#ffdc7f">{{ reports.reasonReported }}</font></li>
+                              {% endfor %}
+                            <center> We have little tolerance towards improper behavior as we
+                              hold our expectations and standards to a high.<br> This is your
+                              FIRST AND LAST WARNING to reflect and improve your behavior
+                              among other students to preserve a safe and welcoming environment
+                              to all users of Archer.<br>
+                              ANY FURTHER REPORTS WILL RESULT IN ACCONT TERMINATION.</center>
+  </center>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+
+<body style="background-color:#476b83">
+  <center style ="color:#ffdc7f; font-size:300%">{{ user.studentName  }}
+  <div class="col-6 col-sm-3 placeholder">
+    <img src="{{ image_file }}"
+    width="30%" height="30%" class="img-fluid rounded-circle">
+  </div>
+</center>
+    <center class='container' id = chatBody
+         style=" color:#ffdc7f; position:relative; width: 500px; height: 200px; overflow-y: scroll; word-wrap: break-word;">
+            <!-- Scroll bar present but disabled when less content -->
+        {% for i in range(0,len) %}
+            {% if chatLog[i][2] == chatLog[i][5] %}
+                <div align='left'>{{ chatLog[i][8] }}: {{ chatLog[i][3] }}</div> <div align="right">{{ chatLog[i][4] }}</div><br>
+
+            {% elif chatLog[i][1] == chatLog[i][6] %}
+                <div align='left'>{{ chatLog[i][8] }} : {{ chatLog[i][3] }}</div> <div align="right">{{ chatLog[i][4] }}</div><br>
+
+            {% endif %}
+        {% endfor %}
+
+    </center>
+
+    <center class="container">
+        <form method = "POST" action="{{ url_for('sendMsg', username = user.username)}}">
+            <div class="col-md-4">
+                <font color="#ffdc7f">{{ form.hidden_tag() }}
+                {{ wtf.form_field(form.message) }}
+                <input class="btn btn-success" type="submit" value="Send">
+            </div>
+        </form>
+    </center>
+</body>
+{% endblock %}

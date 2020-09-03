@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<!--LOGIN FORM CODE-->
+<body style="background-color:#476b83">
+    <div class="container">
+      <br>
+    <form method="POST" action="{{ url_for('login') }}">
+        <d1>
+            {{ form.hidden_tag() }}
+            {{ wtf.form_errors(form, hiddens="only")}}
+                <span style="font-size:20px; color:#ffdc7f; ">{{ wtf.form_field(form.username) }}</span>
+                <span style="font-size:20px; color:#ffdc7f; ">{{ wtf.form_field(form.password) }}</span>
+                <span style="font-size:20px; color:#ffdc7f; ">{{ wtf.form_field(form.remember) }}</span>
+                <span style="font-size:18px; color:#ffdc7f; "><input class="btn btn-success" type="submit" value="Login"></span>
+        </d1>
+    </form>
+<!--LOGIN FORM CODE END-->
+
+<!--OLD FORGOT PASSWORD CODE-->
+        <div class="container" style="text-align: center">
+            <span class="psw">
+                <a href="{{ url_for('reset_request') }}" style="font-size:20px; color:#ffdc7f">Forgot Password?</a>
+            </span>
+        </div>
+<!--OLD FORGOT PASSWORD CODE END-->
+
+    </div>
+    </body>
+<!--LOGIN CODE END-->
+
+{% endblock %}

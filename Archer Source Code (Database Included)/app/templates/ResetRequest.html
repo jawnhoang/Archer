@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+<body style="background-color:#476b83">
+    <div class="container">
+      <br>
+      <form class="form-signin" method="POST" action="">
+          {{ form.hidden_tag() }}
+
+          <h2 class="form-signin-heading" style="font-size:36px; color:#ffdc7f">Reset Request</h2>
+
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.question) }}</font>
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.answer) }}</font>
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.email) }}</font>
+          {{ wtf.form_field(form.submit) }}
+      </form>
+    </div>
+</body>
+{% endblock %}

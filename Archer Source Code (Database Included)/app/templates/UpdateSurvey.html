@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+<!--SURVEY CODE-->
+<body style="background-color: #476b83">
+  <br>
+  <div class="container">
+    <div class="page-header">
+      <h1 style="font-size:36px; color:#ffdc7f">{{ current_user.studentName }} <small>My Profile</small></h1>
+    </div>
+
+    <div class="update_container">
+      <form method="POST" action="">
+        <d1>
+          {{ form.hidden_tag() }}
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.major) }}</font>
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.outdoor) }}</font>
+          <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.indoor) }}</font>
+
+          <input class="btn btn-success" type="submit" style="font-size:18px" value="Select">
+        </d1>
+      </form>
+    </div>
+  </div>
+</body>
+{% endblock %}

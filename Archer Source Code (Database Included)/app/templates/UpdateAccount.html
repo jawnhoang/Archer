@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<!-- update profile code -->
+
+<body style = "background-color:#476b83">
+  <div class="container">
+    <br>
+  <div class="update_account">
+      <form action = "" method="POST" enctype="multipart/form-data">
+          <d1>
+            {{ form.hidden_tag() }}
+            {{wtf.form_errors(form, hiddens="only")}}
+            <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.username) }}</font>
+            <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.password) }}</font>
+            <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.confirmPass) }}</font>
+            <font style="font-size:18px; color:#ffdc7f">{{ wtf.form_field(form.picture) }}</font>
+
+            <input class="btn btn-success" type="submit" style="font-size:18px" value="Update">
+        </d1>
+    </form>
+</div>
+</div>
+</body>
+
+{% endblock %}

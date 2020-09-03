@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+<body style="background-color:#476b83">
+<div class="container">
+<br>
+<h1 style="font-size:36px; color:#ffdc7f">Hello {{ current_user.studentName }} </h1>
+    <div class="form-group">
+        <label for="matchFilter" style="font-size:30px; color:#ffdc7f">Match me by...</label>
+        <select class="form-control" id="matchFilter" onchange="location = this.value;">
+           <option value="">Select a filter...</option>
+           <option value="{{url_for('majorMatch')}}">Major</option>
+           <option value="{{url_for('indoorMatch')}}">Indoor Interests</option>
+           <option value="{{url_for('outdoorMatch')}}">Outdoor Interests</option>
+        </select>
+    </div>
+    <p1 style="font-size:30px; color:#ffdc7f"> These people are in the same major:
+      <div class='panel-Body scroll' id = chatBody style="font-size:24px; color:#ffdc7f; position:relative; width: 1110px; height:600px; overflow-y: auto; word-wrap: break-word;">
+      {% for matches in foundMatch %}
+     {% if matches.person.studentName != current_user.studentName %}
+                <li>
+                    <a href="{{ url_for('userProfile', username = matches.person.username) }}" style="font-size:24px; color:#ffdc7f">
+                      {{ matches.person.studentName }}
+                    </a>
+                </li>
+        {% endif %}
+        {% endfor %}
+    </p1>
+    </div>
+    </body>
+{% endblock %}

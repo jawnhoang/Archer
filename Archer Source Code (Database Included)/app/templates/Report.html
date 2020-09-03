@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<body style="background-color:#476b83">
+  <h1><center><font size = +3 style="color:#ffdc7f; position: relative;">Report {{ user.studentName }}</center>
+    <!--SURVEY CODE-->
+        <br><br
+        <div class="container">
+        <form method="POST">
+            <d1>
+                {{ form.hidden_tag() }}
+                {{ wtf.form_field(form.reasons) }}
+                <input class="btn btn-success" type="submit" value="Submit">
+            </d1>
+        </form>
+        </div>
+    </body>
+    {% endblock %}

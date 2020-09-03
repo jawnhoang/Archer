@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!--Prints out a list of friends-->
+
+{% block content %}
+<body style="background-color:#476b83">
+  <div class="container">
+    <br>
+  <h1 style="font-size:36px; color: #ffdc7f">Direct Message</h1>
+
+    <div class = "friends">
+      <br>
+        <h1  style="font-size:36px; color:#ffdc7f">Friends</h1>
+        {% for friend in current_user.friends %}
+            <p><a href="{{ url_for('sendMsg', username = friend.username)}}"><font color="#FFFFFF">{{ friend.studentName }}</font></p><a>
+        {% endfor %}
+    </div>
+    </div>
+    </body>
+{% endblock %}

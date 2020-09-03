@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<!--SIDE NAV----------------------->
+<div class="container-fluid"> <!--Covers the the whole website EXCEPT navbar-->
+  <div class="row"> <!--Makes the rows seen in the side bar-->
+    <nav class="col-sm-1 col-md-2 hidden-xs-down bg-faded sidebar">
+
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('surveyUpdate')}}" style="font-size:20px; color:#ffdc7f">Update My Profile</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('chat') }}" style="font-size:20px; color:#ffdc7f">Messages</a>
+        </li>
+      </ul>
+
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}" style="font-size:20px; color:#ffdc7f">About Us</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contact') }}" style="font-size:20px; color:#ffdc7f">Contact</a>
+        </li>
+
+        <li class="nav-item">
+          <div class="form-group">
+            <label for="matchFilter" style="font-size:20px; color:#ffdc7f">Match me by...</label>
+            <select class="form-control" id="matchFilter" onchange="location = this.value;">
+              <option value="">Select a filter...</option>
+              <option value="{{url_for('majorMatch')}}">Major</option>
+              <option value="{{url_for('indoorMatch')}}">Indoor Interests</option>
+              <option value="{{url_for('outdoorMatch')}}">Outdoor Interests</option>
+            </select>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+    <!--SIDE NAV END ---------------------->
+    <body style="background-color:#476b83">
+      {% if not current_user.isBlocking(user) and not user.isBlocking(current_user)%}
+      <h1 style="color:#ffdc7f">{{ user.studentName }}'s Profile </h1>
+      <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+        <div class="col-6 col-sm-3 placeholder">
+          <img src="{{ image_file }}"
+          width="30%" height="30%" class="img-fluid rounded-circle">
+        </div>
+
+        {% if current_user.isFriendsWith(user) %}
+        <p>Friends √ </p>
+        <a href="{{ url_for('unFriend', username = user.username)}}" style="font-size:10px"
+        class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Remove Friend</a>
+        {% else %}
+        <a href="{{ url_for('addFriend', username = user.username)}}" style="font-size:20px"
+        class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Friend</a>
+        {% endif %}
+
+        {% if user != current_user %}
+        <p>
+          <a href="{{ url_for('sendMsg', username=user.username) }}" style="font-size:20px; color:#ffdc7f">
+            Send private message to {{ user.studentName }}
+          </a>
+        </p>
+        {% endif %}
+
+        <div class = "major">
+          <h1 style="font-size:28px; color:#ffdc7f">Major</h1>
+          <font style="font-size:20px; color:#ffdc7f">{{ userMajor }}
+          </div>
+          <br>
+          <div class="Interests">
+            <h1 style="font-size:28px; color:#ffdc7f">Interests</h1>
+            <font style="font-size:20px; color:#ffdc7f">{{ userOutdoor }}
+              <br>
+            <font style="font-size:20px; color:#ffdc7f">{{ userIndoor }}
+          </div>
+          <a href="{{ url_for('reportUser', username = user.username)}}" style="font-size:10px;"
+          class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Report</a>
+          <a href="{{ url_for('blockUser', username = user.username)}}" style="font-size:10px;"
+          class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Block User</a>
+        </main>
+        </div>
+        <a href="{{ url_for('updateAccount', username = current_user.username)}}" class="btn btn-primary btn-sm active"
+           role="button" style="font-size:20px" aria-pressed="true">Settings
+        </a>
+        </div>
+
+        {% elif user.isBlocking(current_user) %}
+        <h1 style="color:#ffdc7f">{{ user.studentName }}'s Dashboard </h1>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="{{ image_file }}"
+            width="30%" height="30%" class="img-fluid rounded-circle">
+          </div>
+        <h2 style='font-size: 50px;'> You have been blocked from interacting with this profile </h2>
+
+        {% elif current_user.isBlocking(user) %}
+        <h1 style="color:#ffdc7f">{{ user.studentName }}'s Dashboard </h1>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="{{ image_file }}"
+            width="30%" height="30%" class="img-fluid rounded-circle">
+          </div>
+
+          <body> Account has been blocked by you </body>
+          <a href="{{ url_for('unblockUser', username = user.username)}}" style="font-size:10px"
+          class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Unblock</a>
+          {% endif %}
+      {% endblock %}

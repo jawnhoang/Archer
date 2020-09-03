@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+<body style="background-color:#476b83">
+  <center class='panel-Body scroll' id = inboxBody
+       style="font-size:18px; color:#ffdc7f; position: relative; width: relative; height: 200px; overflow-y: scroll; word-wrap: break-word;">
+    {% for notif in getNotif %}
+    {% if notif.seenNotif == 0 %}
+    <form action = "" method="POST">
+    {{ form.hidden_tag() }}
+    {{wtf.form_errors(form, hiddens="only")}}
+            <li> {{ notif.timestamp.strftime('%m %d %Y') }} | {{ notif.body }}
+              {% if notif.body == 'new friend request from' and notif.seenNotif == 0 %}
+                <a href="{{ url_for('userProfile', username = notif.nSender.username) }}">
+                    <font color="#FFFFFF">{{ notif.nSender.studentName }}</font>
+                    <a href="{{ url_for('declineFriend', username = notif.nSender.username)}}" style="font-size:10px"
+                    class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Decline</a>
+                </a>
+
+                {% elif notif.body == 'new message from' and notif.seenNotif == 0 %}
+                <a href="{{ url_for('sendMsg', username = notif.nSender.username) }}">
+                    <font color="#FFFFFF">{{ notif.nSender.studentName }}</font>
+                </a>
+
+        {% elif notif.seenNotif == 1 %}
+        <p> No new notifications </p>
+
+            </li>
+
+{% endif %}
+
+          {% endif %}
+
+    {% endfor %}
+
+</center>
+<center><input class="btn btn-success" type="submit" value="Clear All"></center>
+</body>
+{% endblock %}

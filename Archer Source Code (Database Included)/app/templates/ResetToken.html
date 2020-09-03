@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+  {{title}}
+{% endblock %}
+
+
+{% block content %}
+
+
+<!---EMAIL VERIFICANTION CODE -->
+<body style="background-color:#476b83">
+    <div class="container">
+      <br>
+        <form class="form-signin" method="POST" action="">
+                {{ form.hidden_tag() }}
+            <h2 class="form-signin-heading" style="font-size:36px; color:#ffdc7f">Reset Password</h2>
+                  <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.password) }}</font>
+                  <font style="font-size:20px; color:#ffdc7f">{{ wtf.form_field(form.submit) }}</font>
+        </form>
+
+        <!---EMAIL VERIFICANTION CODE -->
+    </div>
+</body>
+{% endblock %}
